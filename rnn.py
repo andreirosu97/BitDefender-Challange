@@ -86,25 +86,6 @@ x_test = pd.DataFrame(x_test, columns=names)
 
 print(np.sum(pca.explained_variance_ratio_))
 
-#%%
-rf = RandomForestRegressor(n_estimators=128, n_jobs=-1, min_samples_leaf=3, max_depth=8, max_features=0.7, oob_score=True)
-rf.fit(x_train, y_train)
-print('Validation: ', r2_score(y_valid, rf.predict(x_valid)))
-print('Training: ', r2_score(y_train, rf.predict(x_train)))
-print('OOB', rf.oob_score_)
-#%%
-print(x_valid)
-plt.scatter(y_valid, rf.predict(x_valid))
-
-#%%
-fimp = pd.DataFrame({'cols':x_train.columns, 'imp':rf.feature_importances_}).sort_values('imp', ascending=False)
-
-#%%
-fimp.plot('cols', 'imp', figsize=(16,9), legend=True)
-
-#%%
-fimp[:30].plot('cols', 'imp', 'barh', figsize=(16, 9), legend=False)
-
 #%%constructing, training and evaluation of model
 model = Sequential()
 #%% input layer
